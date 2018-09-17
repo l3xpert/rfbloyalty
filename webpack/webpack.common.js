@@ -9,11 +9,7 @@ const utils = require('./utils.js');
 module.exports = (options) => ({
     resolve: {
         extensions: ['.ts', '.js'],
-        modules: ['node_modules'],
-        alias: {
-            app: utils.root('src/main/webapp/app/'),
-            ...rxPaths()
-        }
+        modules: ['node_modules']        
     },
     stats: {
         children: false
