@@ -2,6 +2,7 @@ import org.gradle.internal.os.OperatingSystem
 
 buildscript {
     repositories {
+        jcenter()
         mavenLocal()
         mavenCentral()
         maven { url "http://repo.spring.io/plugins-release" }
@@ -156,6 +157,7 @@ configurations {
 }
 
 repositories {
+    jcenter()
     mavenLocal()
     mavenCentral()
     //jhipster-needle-gradle-repositories - JHipster will add additional repositories
