@@ -38,11 +38,13 @@ task copyDockerFiles(type: Copy) {
     exclude "**/*.yml"
 }
 
+def rfbImageName = 'alvieira/rfbloyalty'
+
 task buildDocker(type: DockerBuildImage, dependsOn: 'copyDockerFiles') {
     description = "Package application as Docker image"
     group = "Docker"
     inputDir = project.file("${project.buildDir}/docker")
-    tags = ["rfbloyalty:latest".toString(), "rfbloyalty:${project.version}".toString()]
+    tags = ["${rfbImageName}:latest".toString(), "${rfbImageName}:${project.version}".toString()]
 }
 
 /**
@@ -51,7 +53,7 @@ task buildDocker(type: DockerBuildImage, dependsOn: 'copyDockerFiles') {
  * Note: at this time the plugin does not support pushing multiple tags
  */
 task pushDockerLatest(type: DockerPushImage, dependsOn: 'buildDocker') {
-    imageName = "rfbloyalty"
+    imageName = rfbImageName
     tag = "latest"
 }
 
@@ -59,6 +61,6 @@ task pushDockerLatest(type: DockerPushImage, dependsOn: 'buildDocker') {
  * Use to push project version tag to docker hub
  */
 task pushDockerVersionTag(type: DockerPushImage, dependsOn: 'buildDocker') {
-    imageName = "rfbloyalty"
+    imageName = rfbImageName
     tag =  "${project.version}".toString()
 }
